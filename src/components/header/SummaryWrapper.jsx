@@ -5,7 +5,7 @@ import {
   totalDays,
   totalMembers,
   totalHours,
-} from "../../tableDataSlice";
+} from "../table/tableComponents/tableDataSlice";
 import { getTotalTime } from "../../helpers";
 
 export default function SummaryWrapper() {

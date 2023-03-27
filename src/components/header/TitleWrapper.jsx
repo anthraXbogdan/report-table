@@ -5,7 +5,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import AvTimerIcon from "@mui/icons-material/AvTimer";
 import DownloadingIcon from "@mui/icons-material/Downloading";
 import ThemeToggler from "../ThemeToggler";
-import { dateRange } from "../../tableDataSlice";
+import { dateRange } from "../table/tableComponents/tableDataSlice";
 
 export default function TitleWrapper(props) {
   const { onPrintClick } = props;

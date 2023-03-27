@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { data } from "./mockData";
-import { getTotal } from "./helpers";
+import { data } from "../../../mockData";
+import { getTotal } from "../../../helpers";
 
 const initialState = data;
 

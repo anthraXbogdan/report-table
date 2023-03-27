@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setToFirstPage } from "./tableComponents/pageSlice";
 import { searchSubject } from "./tableComponents/searchSubjectSlice";
 import { page } from "./tableComponents/pageSlice";
-import { tableData } from "../../tableDataSlice";
+import { tableData } from "./tableComponents/tableDataSlice";
 import { Paper } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
