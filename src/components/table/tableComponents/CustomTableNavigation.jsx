@@ -57,8 +57,11 @@ const theme = createTheme({
 });
 
 export default function CustomTableNavigation(props) {
-  const { count, onPageChange, rowsPerPage, onRowsPerPageChange } = props;
+  const { count, rowsPerPage, onRowsPerPageChange } = props;
   const pageTracker = useSelector(page);
+
+  // onPageChange prop is required by the MUI
+  const handlePageChange = () => {};
 
   return (
     <CustomTableFooter>
@@ -78,7 +81,7 @@ export default function CustomTableNavigation(props) {
             rowsPerPageOptions={[5, 10, 15, 20, 25, 50, 100]}
             count={count}
             page={pageTracker.value}
-            onPageChange={onPageChange}
+            onPageChange={handlePageChange}
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={onRowsPerPageChange}
             ActionsComponent={TablePaginationActions}

@@ -17,7 +17,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 
 export default function TablePaginationActions(props) {
   const theme = useTheme();
-  const { count, rowsPerPage } = props;
+  const { count, rowsPerPage, onPageChange } = props;
 
   const pageTracker = useSelector(page);
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ export default function TablePaginationActions(props) {
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        disabled={pageTracker.value >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
