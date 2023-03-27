@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { page } from "./pageSlice";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
@@ -55,7 +57,8 @@ const theme = createTheme({
 });
 
 export default function CustomTableNavigation(props) {
-  const { count, page, onPageChange, rowsPerPage, onRowsPerPageChange } = props;
+  const { count, onPageChange, rowsPerPage, onRowsPerPageChange } = props;
+  const pageTracker = useSelector(page);
 
   return (
     <CustomTableFooter>
@@ -71,9 +74,10 @@ export default function CustomTableNavigation(props) {
             }}
             container="div"
             colSpan={3}
-            rowsPerPageOptions={[5, 10, 15, 25, { label: "All", value: -1 }]}
+            // rowsPerPageOptions={[5, 10, 15, 25, { label: "All", value: -1 }]}
+            rowsPerPageOptions={[5, 10, 15, 20, 25, 50, 100]}
             count={count}
-            page={page}
+            page={pageTracker.value}
             onPageChange={onPageChange}
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={onRowsPerPageChange}

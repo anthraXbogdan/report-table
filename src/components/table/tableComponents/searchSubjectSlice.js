@@ -12,8 +12,8 @@ const searchSubjectSlice = createSlice({
   },
 });
 
-export const { searchSubjectUpdated } = searchSubjectSlice.actions;
-
 export const searchSubject = (state) => state.searchSubject;
+
+export const { searchSubjectUpdated } = searchSubjectSlice.actions;
 
 export default searchSubjectSlice.reducer;

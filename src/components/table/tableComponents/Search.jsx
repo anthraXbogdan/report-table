@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchSubjectUpdated } from "./searchSubjectSlice";
+import { setToFirstPage } from "./pageSlice";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -52,6 +52,7 @@ export default function Search(props) {
   const dispatch = useDispatch();
 
   const handleInputClick = () => {
+    dispatch(setToFirstPage());
     dispatch(searchSubjectUpdated(searchSubject.toLowerCase()));
   };
 

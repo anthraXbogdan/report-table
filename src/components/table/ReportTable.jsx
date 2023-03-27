@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setToFirstPage } from "./tableComponents/pageSlice";
 import { searchSubject } from "./tableComponents/searchSubjectSlice";
+import { page } from "./tableComponents/pageSlice";
 import { tableData } from "../../tableDataSlice";
 import { Paper } from "@mui/material";
 import TableContainer from "@mui/material/TableContainer";
@@ -47,21 +49,19 @@ function stableSort(array, comparator) {
 export const ReportTable = React.forwardRef((props, ref) => {
   const tableRows = useSelector(tableData);
   const subject = useSelector(searchSubject);
+  const pageTracker = useSelector(page);
+
+  const dispatch = useDispatch();
 
   const [rows, setRows] = useState(tableRows);
   const [searched, setSearched] = useState("");
-  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("hours");
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+    dispatch(setToFirstPage());
   };
 
   const handleRequestSort = (event, property) => {
@@ -72,7 +72,9 @@ export const ReportTable = React.forwardRef((props, ref) => {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    pageTracker.value > 0
+      ? Math.max(0, (1 + pageTracker.value) * rowsPerPage - rows.length)
+      : 0;
 
   // Filtration logic for table search functionality
   const handleSearchChange = (e) => {
@@ -128,7 +130,6 @@ export const ReportTable = React.forwardRef((props, ref) => {
           <CustomTableBody
             rows={rows}
             order={order}
-            page={page}
             orderBy={orderBy}
             rowsPerPage={rowsPerPage}
             stableSort={stableSort}
@@ -136,8 +137,6 @@ export const ReportTable = React.forwardRef((props, ref) => {
           />
           <CustomTableNavigation
             count={rows.length}
-            page={page}
-            onPageChange={handleChangePage}
             rowsPerPage={rowsPerPage}
             onRowsPerPageChange={handleChangeRowsPerPage}
             emptyRows={emptyRows}
