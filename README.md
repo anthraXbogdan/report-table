@@ -2,16 +2,8 @@
 
 ### Learning project using React, MUI, Redux (implementation of: search, filter & pagination on a table)
 
-#### (Project build with Vite frontend build tool - https://vitejs.dev/)
+#### (Project build with Vite frontend build tool - https://vitejs.dev/)</br>
 
-</br>
-
-#### Install al dependencies: _$ npm install_
-
-#### Start dev server: _$ npm run dev_
-
-</br>
-
----
-
-#### As resource provider for the table use [this json server](https://github.com/anthraXbogdan/report-table-jsonServer).
+Install al dependencies: _$ npm install_</br>
+Start dev server: _$ npm run dev_</br>
+As resource provider for the table use [this json server](https://github.com/anthraXbogdan/report-table-jsonServer).
