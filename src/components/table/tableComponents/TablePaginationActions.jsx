@@ -17,7 +17,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 
 export default function TablePaginationActions(props) {
   const theme = useTheme();
-  const { count, rowsPerPage, onPageChange } = props;
+  const { count, rowsPerPage } = props;
 
   const pageTracker = useSelector(page);
   const dispatch = useDispatch();

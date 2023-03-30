@@ -1,30 +1,31 @@
 :root {
-   /* MAIN COLORS */
-   --body-background-color: #4d1602;
-   --app-primary-background-color: #fff;
-   --app-secondary-background-color: #f96e39;
-   --app-primary-color: #1e1e1e;
-   --app-secondary-color: #fff;
-   --app-light-color: #646566;
+  /* MAIN COLORS */
+  --body-background-color: #4d1602;
+  --app-primary-background-color: #fff;
+  --app-secondary-background-color: #f96e39;
+  --app-primary-color: #1e1e1e;
+  --app-secondary-color: #fff;
+  --app-light-color: #646566;
+  --spinner-color: #f96e39;
 
-   /* TABLE COLORS */
-   --table-primary-color: #1e1e1e;
-   --table-secondary-color: #888d9c;
-   --table-border-color: #e1e1e1;
-   --table-primary-background-color: #fff;
-   --table-hover-background-color: rgba(109, 107, 107, 0.11);
+  /* TABLE COLORS */
+  --table-primary-color: #1e1e1e;
+  --table-secondary-color: #888d9c;
+  --table-border-color: #e1e1e1;
+  --table-primary-background-color: #fff;
+  --table-hover-background-color: rgba(109, 107, 107, 0.11);
 }
 
 .dark {
-   /* MAIN COLORS */
-   --app-primary-background-color: #1e1e1e;
-   --app-secondary-background-color: #800000;
-   --app-primary-color: #d1d1d1;
-   --app-secondary-color: #1e1e1e;
+  /* MAIN COLORS */
+  --app-primary-background-color: #1e1e1e;
+  --app-secondary-background-color: #800000;
+  --app-primary-color: #d1d1d1;
+  --app-secondary-color: #1e1e1e;
 
-   /* TABLE COLORS */
-   --table-primary-background-color: #1e1e1e;
-   --table-hover-background-color: #4b4949;
-   --table-primary-color: #c1c1c1;
-   --table-border-color: #504e4e;
+  /* TABLE COLORS */
+  --table-primary-background-color: #1e1e1e;
+  --table-hover-background-color: #4b4949;
+  --table-primary-color: #c1c1c1;
+  --table-border-color: #504e4e;
 }

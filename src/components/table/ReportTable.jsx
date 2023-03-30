@@ -15,6 +15,7 @@ import CustomTableBody from "./tableComponents/CustomTableBody";
 import EnhancedTableHead from "./tableComponents/EnhancedTableHead";
 import CustomTableNavigation from "./tableComponents/CustomTableNavigation";
 import { getDate } from "../../helpers";
+import { Spinner } from "../Spinner";
 
 // Sorting logic (ascending and descending)
 function descendingComparator(a, b, orderBy) {
@@ -52,6 +53,9 @@ function stableSort(array, comparator) {
   });
 }
 
+/* The prop "ref" is used on the component whose content will be printed 
+table content).
+*/
 export const ReportTable = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
 
@@ -109,7 +113,7 @@ export const ReportTable = React.forwardRef((props, ref) => {
     }
   }, [keyword]);
 
-  return (
+  const table = (
     <Paper
       elevation={4}
       sx={{ width: "100%", overflow: "hidden", margin: "0 auto" }}
@@ -153,4 +157,16 @@ export const ReportTable = React.forwardRef((props, ref) => {
       </TableContainer>
     </Paper>
   );
+
+  let content;
+
+  if (tableDataStatus === "loading") {
+    content = <Spinner text="Loading table data..." />;
+  } else if (tableDataStatus === "succeeded") {
+    content = table;
+  } else if (tableDataStatus === "failed") {
+    content = <div>{error}</div>;
+  }
+
+  return <>{content}</>;
 });
