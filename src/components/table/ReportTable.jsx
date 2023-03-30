@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchTableData } from "./tableComponents/tableDataSlice";
 import { setToFirstPage } from "./tableComponents/pageSlice";
 import { searchSubject } from "./tableComponents/searchSubjectSlice";
 import { page } from "./tableComponents/pageSlice";
@@ -47,17 +48,29 @@ function stableSort(array, comparator) {
 }
 
 export const ReportTable = React.forwardRef((props, ref) => {
+  const dispatch = useDispatch();
+
   const tableRows = useSelector(tableData);
   const subject = useSelector(searchSubject);
   const pageTracker = useSelector(page);
 
-  const dispatch = useDispatch();
+  const tableDataStatus = useSelector((state) => state.tableData.status);
+  const error = useSelector((state) => state.tableData.error);
 
-  const [rows, setRows] = useState(tableRows);
+  const [rows, setRows] = useState([]);
   const [searched, setSearched] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("hours");
+
+  useEffect(() => {
+    if (tableDataStatus === "idle") {
+      setTimeout(() => {
+        dispatch(fetchTableData());
+      }, "3000");
+    }
+    setRows(tableRows);
+  }, [tableDataStatus, dispatch]);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
@@ -83,22 +96,12 @@ export const ReportTable = React.forwardRef((props, ref) => {
 
   useEffect(() => {
     const filteredRows = tableRows.filter((row) => {
-      if (subject.value === "date") {
-        return row[subject.value][subject.value]
-          .toLocaleDateString()
-          .toLowerCase()
-          .includes(searched.toLowerCase());
-      }
       return row[subject.value][subject.value]
         .toLowerCase()
         .includes(searched.toLowerCase());
     });
     setRows(filteredRows);
   }, [searched]);
-
-  useEffect(() => {
-    setRows(tableRows);
-  }, [subject]);
 
   return (
     <Paper

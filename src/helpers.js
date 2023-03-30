@@ -1,6 +1,8 @@
 // return ammount of time in h:m format (ex: 4:20)
 const getTime = (seconds) => {
-  return new Date(seconds * 1000).toISOString().slice(11, 16);
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds - hours * 3600) / 60);
+  return `${hours}:${minutes}`;
 };
 
 // return ammount of time in h m format (ex: 16h 20m)
@@ -19,4 +21,11 @@ const getTotal = (state, target) => {
   return uniqueTargetMembers.size;
 };
 
-export { getTime, getTotalTime, getTotal };
+const getDate = (dateISOString) => {
+  const month = dateISOString.slice(5, 7);
+  const day = dateISOString.slice(8, 10);
+  const year = dateISOString.slice(0, 4);
+  return `${month}/${day}/${year}`;
+};
+
+export { getTime, getTotalTime, getTotal, getDate };

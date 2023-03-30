@@ -4,13 +4,39 @@ function createData(date, project, task, person, hours) {
   return { date, project, task, person, hours };
 }
 
-export const data1 = [
+function generateEmployees() {
+  const data = [];
+
+  for (let i = 0; i < 5; i++) {
+    data.push(
+      createData(
+        {
+          date: faker.date
+            .between("2017-01-01T00:00:00.000Z", "2023-01-01T00:00:00.000Z")
+            .toLocaleDateString(),
+        },
+        {
+          project: faker.commerce.productAdjective(),
+          description: faker.commerce.productDescription(),
+        },
+        { task: faker.random.words(5) },
+        { person: faker.name.findName(), avatar: faker.image.avatar() },
+        { hours: Number.parseInt(faker.random.numeric(4)) }
+      )
+    );
+  }
+
+  return data;
+}
+
+export const data = generateEmployees();
+
+export const data2 = [
   createData(
     {
-      date: faker.date.between(
-        "2017-01-01T00:00:00.000Z",
-        "2023-01-01T00:00:00.000Z"
-      ),
+      date: faker.date
+        .between("2017-01-01T00:00:00.000Z", "2023-01-01T00:00:00.000Z")
+        .toLocaleDateString(),
     },
     {
       project: "Illustration & Branding",
@@ -23,10 +49,9 @@ export const data1 = [
   ),
   createData(
     {
-      date: faker.date.between(
-        "2017-01-01T00:00:00.000Z",
-        "2023-01-01T00:00:00.000Z"
-      ),
+      date: faker.date
+        .between("2017-01-01T00:00:00.000Z", "2023-01-01T00:00:00.000Z")
+        .toString(),
     },
     {
       project: "Style Guide",
@@ -68,7 +93,7 @@ export const data1 = [
   ),
 ];
 
-export const data = [
+export const data1 = [
   createData(
     {
       date: faker.date.between(

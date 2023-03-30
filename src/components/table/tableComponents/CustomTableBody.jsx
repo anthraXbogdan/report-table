@@ -13,7 +13,7 @@ import {
   SmallTableRow,
   PrimaryTableRow,
 } from "./customTableCells";
-import { getTime } from "../../../helpers";
+import { getTime, getDate } from "../../../helpers";
 
 export default function CustomTableBody(props) {
   const {
@@ -45,9 +45,7 @@ export default function CustomTableBody(props) {
                 "& td": { borderBlockEnd: 0 },
               }}
             >
-              <PrimaryTableCell>
-                {row.date.date.toLocaleDateString()}
-              </PrimaryTableCell>
+              <PrimaryTableCell>{getDate(row.date.date)}</PrimaryTableCell>
               <PrimaryTableCell sx={{ fontWeight: "600" }}>
                 {row.project.project}
               </PrimaryTableCell>
