@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import PrintIcon from "@mui/icons-material/Print";
 import AvTimerIcon from "@mui/icons-material/AvTimer";
 import DownloadingIcon from "@mui/icons-material/Downloading";
-import ThemeToggler from "../ThemeToggler";
+import ThemeToggler from "./ThemeToggler";
 import { tableData } from "../table/tableComponents/tableDataSlice";
 import { getDate } from "../../helpers";
 

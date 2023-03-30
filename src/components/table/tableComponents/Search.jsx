@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
-import { searchSubjectUpdated } from "./searchSubjectSlice";
+import {
+  resetSearchKeyword,
+  searchSubjectUpdated,
+  setSearchKeyword,
+} from "./tableSearchSlice";
 import { setToFirstPage } from "./pageSlice";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -47,20 +51,25 @@ const theme = createTheme({
 });
 
 export default function Search(props) {
-  const { searchSubject, onSearchChange } = props;
+  const { searchSubject } = props;
 
   const dispatch = useDispatch();
 
   const handleInputClick = () => {
     dispatch(setToFirstPage());
+    dispatch(resetSearchKeyword());
     dispatch(searchSubjectUpdated(searchSubject.toLowerCase()));
+  };
+
+  const handleSearchChange = (e) => {
+    dispatch(setSearchKeyword(e.target.value));
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Autocomplete
         freeSolo
-        disableClearable
+        // disableClearable
         size="small"
         options={[]}
         renderInput={(params) => (
@@ -72,7 +81,7 @@ export default function Search(props) {
             }}
             placeholder={`Search by ${searchSubject}`}
             variant="outlined"
-            onChange={onSearchChange}
+            onChange={handleSearchChange}
             onClick={handleInputClick}
           />
         )}

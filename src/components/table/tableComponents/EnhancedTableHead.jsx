@@ -25,7 +25,7 @@ const theme = createTheme({
 });
 
 export default function EnhancedTableHead(props) {
-  const { order, orderBy, onRequestSort, onSearchChange } = props;
+  const { order, orderBy, onRequestSort } = props;
 
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -104,10 +104,7 @@ export default function EnhancedTableHead(props) {
                 {column.label}
               </TableSortLabel>
               <Box sx={{ marginBlockStart: "10px" }}>
-                <Search
-                  searchSubject={column.label}
-                  onSearchChange={onSearchChange}
-                />
+                <Search searchSubject={column.label} />
               </Box>
             </PrimaryTableCell>
           ))}

@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTableData } from "./tableComponents/tableDataSlice";
 import { setToFirstPage } from "./tableComponents/pageSlice";
-import { searchSubject } from "./tableComponents/searchSubjectSlice";
+import {
+  searchTarget,
+  searchKeyword,
+} from "./tableComponents/tableSearchSlice";
 import { page } from "./tableComponents/pageSlice";
 import { tableData } from "./tableComponents/tableDataSlice";
 import { Paper } from "@mui/material";
@@ -11,7 +14,9 @@ import Table from "@mui/material/Table";
 import CustomTableBody from "./tableComponents/CustomTableBody";
 import EnhancedTableHead from "./tableComponents/EnhancedTableHead";
 import CustomTableNavigation from "./tableComponents/CustomTableNavigation";
+import { getDate } from "../../helpers";
 
+// Sorting logic (ascending and descending)
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy][orderBy] < a[orderBy][orderBy]) {
     return -1;
@@ -51,23 +56,21 @@ export const ReportTable = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
 
   const tableRows = useSelector(tableData);
-  const subject = useSelector(searchSubject);
+  const subject = useSelector(searchTarget);
+  const keyword = useSelector(searchKeyword);
   const pageTracker = useSelector(page);
 
   const tableDataStatus = useSelector((state) => state.tableData.status);
   const error = useSelector((state) => state.tableData.error);
 
   const [rows, setRows] = useState([]);
-  const [searched, setSearched] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("hours");
 
   useEffect(() => {
     if (tableDataStatus === "idle") {
-      setTimeout(() => {
-        dispatch(fetchTableData());
-      }, "3000");
+      dispatch(fetchTableData());
     }
     setRows(tableRows);
   }, [tableDataStatus, dispatch]);
@@ -90,18 +93,21 @@ export const ReportTable = React.forwardRef((props, ref) => {
       : 0;
 
   // Filtration logic for table search functionality
-  const handleSearchChange = (e) => {
-    setSearched(e.target.value);
-  };
-
   useEffect(() => {
-    const filteredRows = tableRows.filter((row) => {
-      return row[subject.value][subject.value]
-        .toLowerCase()
-        .includes(searched.toLowerCase());
-    });
-    setRows(filteredRows);
-  }, [searched]);
+    if (subject === "date") {
+      const filteredRows = tableRows.filter((row) => {
+        return getDate(row[subject][subject]).includes(keyword);
+      });
+      setRows(filteredRows);
+    } else {
+      const filteredRows = tableRows.filter((row) => {
+        return row[subject][subject]
+          .toLowerCase()
+          .includes(keyword.toLowerCase());
+      });
+      setRows(filteredRows);
+    }
+  }, [keyword]);
 
   return (
     <Paper
@@ -128,7 +134,6 @@ export const ReportTable = React.forwardRef((props, ref) => {
             order={order}
             orderBy={orderBy}
             onRequestSort={handleRequestSort}
-            onSearchChange={handleSearchChange}
           />
           <CustomTableBody
             rows={rows}

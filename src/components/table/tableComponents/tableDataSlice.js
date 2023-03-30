@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getTotal } from "../../../helpers";
-import { data } from "../../../../mockData";
 
 const initialState = {
   tableData: [],
@@ -13,7 +12,6 @@ export const fetchTableData = createAsyncThunk(
   async () => {
     const response = await fetch("http://localhost:3004/projects");
     const projects = await response.json();
-    // console.log(projects);
     return projects;
   }
 );
@@ -42,15 +40,6 @@ const tableDataSlice = createSlice({
 // export const {} = tableDataSlice.actions;
 
 export const tableData = (state) => state.tableData.tableData;
-
-export const dateRange = (state) => {
-  const dates = [];
-  state.tableData.tableData.map((item) => {
-    dates.push(item.date.date);
-  });
-  dates.sort((a, b) => a - b);
-  return dates;
-};
 
 export const totalProjects = (state) => {
   return getTotal(state.tableData.tableData, "project");
