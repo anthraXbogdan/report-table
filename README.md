@@ -6,12 +6,12 @@
 
 </br>
 
-### Install al dependencies: _$ npm install_
+#### Install al dependencies: _$ npm install_
 
-### Start dev server: _$ npm run dev_
+#### Start dev server: _$ npm run dev_
 
 </br>
 
 ---
 
-### As resource provider for the table use [this json server](https://github.com/anthraXbogdan/report-table-jsonServer).
+#### As resource provider for the table use [this json server](https://github.com/anthraXbogdan/report-table-jsonServer).
